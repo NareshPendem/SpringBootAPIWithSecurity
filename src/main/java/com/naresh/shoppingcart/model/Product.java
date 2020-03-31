@@ -1,13 +1,13 @@
 package com.naresh.shoppingcart.model;
 
-import org.springframework.beans.factory.annotation.Value;
 
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Positive;
 import javax.validation.constraints.PositiveOrZero;
 import java.math.BigDecimal;
 
-
+/**
+ * Holds the properties of each Product.
+ */
 public class Product {
     @NotNull(message = "Product id cannot be null")
     private String id;
@@ -38,5 +38,14 @@ public class Product {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", price=" + price +
+                '}';
     }
 }

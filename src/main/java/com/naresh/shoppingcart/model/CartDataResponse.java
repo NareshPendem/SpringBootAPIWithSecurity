@@ -6,6 +6,9 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
 
+/**
+ * Checkout API Outgoing Response.
+ */
 public class CartDataResponse {
     @JsonProperty("items")
     private List<ProductLineItem> productLineItems;
@@ -52,5 +55,16 @@ public class CartDataResponse {
 
     public void setTotalTaxApplied(BigDecimal totalTaxApplied) {
         this.totalTaxApplied = totalTaxApplied;
+    }
+
+    @Override
+    public String toString() {
+        return "CartDataResponse{" +
+                "productLineItems=" + productLineItems +
+                ", id='" + id + '\'' +
+                ", totalCartPrice=" + totalCartPrice +
+                ", totalTaxApplied=" + totalTaxApplied +
+                ", errors=" + errors +
+                '}';
     }
 }

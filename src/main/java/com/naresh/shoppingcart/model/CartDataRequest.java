@@ -9,6 +9,9 @@ import javax.validation.constraints.PositiveOrZero;
 import java.math.BigDecimal;
 import java.util.List;
 
+/**
+ * Checkout API Incoming Request.
+ */
 public class CartDataRequest {
     @JsonProperty("items")
     @NotNull(message = "Items cannot be null")
@@ -44,5 +47,14 @@ public class CartDataRequest {
 
     public void setCurrencyRate(BigDecimal currencyRate) {
         this.currencyRate = currencyRate;
+    }
+
+    @Override
+    public String toString() {
+        return "CartDataRequest{" +
+                "productLineItems=" + productLineItems +
+                ", taxRate=" + taxRate +
+                ", currencyRate=" + currencyRate +
+                '}';
     }
 }

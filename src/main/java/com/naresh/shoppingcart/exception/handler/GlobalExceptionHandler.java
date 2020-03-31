@@ -15,11 +15,20 @@ import org.springframework.web.servlet.NoHandlerFoundException;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Collections;
 
+/**
+ * Generic Exception class to handle exceptions across the Application.
+ */
 @ControllerAdvice
 @RestController
 public class GlobalExceptionHandler {
     Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
+    /**
+     * Exception Handler for Bad Input Requests.
+     * @param request
+     * @param e
+     * @return
+     */
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(value = {InvalidInputDataException.class})
     public CartDataResponse invalidInputData(HttpServletRequest request , InvalidInputDataException e){
@@ -27,6 +36,11 @@ public class GlobalExceptionHandler {
         return e.getErrorResponse();
     }
 
+    /**
+     * Exception Handler for Unsupported Media Type.
+     * @param e
+     * @return
+     */
     @ExceptionHandler(value = HttpMediaTypeNotSupportedException.class)
     @ResponseStatus(HttpStatus.UNSUPPORTED_MEDIA_TYPE)
     public CartDataResponse handleUnsupportMediaType(HttpMediaTypeNotSupportedException e) {
@@ -37,6 +51,11 @@ public class GlobalExceptionHandler {
         return errorResponse;
     }
 
+    /**
+     * Exception Handler for Invalid EndPoint Requests.
+     * @param e
+     * @return
+     */
     @ExceptionHandler(value = NoHandlerFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public CartDataResponse handleUnsupportMediaType(NoHandlerFoundException e) {
@@ -47,6 +66,11 @@ public class GlobalExceptionHandler {
         return errorResponse;
     }
 
+    /**
+     * Exception Handler for Unhandled Exceptions across Application.
+     * @param e
+     * @return
+     */
     @ExceptionHandler(value = Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public CartDataResponse handleException(Exception e) {

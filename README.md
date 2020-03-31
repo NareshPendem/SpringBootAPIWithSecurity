@@ -6,7 +6,7 @@
 
 * **URL**
 
-  /checkout/
+  /checkout
 
 * **Method:**
 
@@ -16,9 +16,9 @@
 
 	None
 
-* **Data Params**
+* **POST Data**
 
-    **Sample Request Payload:** {
+    **Sample Request Payload:** `{
    "currencyRate" : 1,
    "taxRate":5,
    "items":[
@@ -39,12 +39,12 @@
          "quantity":2
       }
    ]
-}
+}`
 
 * **Success Response:**
 
   * **Code:** 201 <br />
-    **Content:** {
+    **Content:** `{
     "id": "4e9f525f-6c1f-485a-ad22-196f5286d825",
     "totalCartPrice": 63.00,
     "totalTaxApplied": 3.00,
@@ -70,7 +70,7 @@
             "taxPriceApplied": 2.00
         }
     ]
-	}
+	}`
  
 * **Error Response:**
 
@@ -91,7 +91,7 @@
     "errors": [
         "Resource Not Available"
     ]
-  }
+  }`
 	
   OR
   
@@ -101,7 +101,7 @@
     "errors": [
         "UnSupported Media Type"
     ]
-  }
+  }`
 
 ### Reference Documentation
 For further reference, please consider the following sections:

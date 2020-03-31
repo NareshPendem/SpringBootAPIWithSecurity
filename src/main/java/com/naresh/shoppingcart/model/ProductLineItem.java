@@ -4,6 +4,9 @@ import javax.validation.Valid;
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
 
+/**
+ * Holds the properties of Product,quantity,pricing info.
+ */
 public class ProductLineItem {
     @NotNull(message = "Product Cannot be null")
     @Valid
@@ -44,5 +47,15 @@ public class ProductLineItem {
 
     public void setTaxPriceApplied(BigDecimal taxPriceApplied) {
         this.taxPriceApplied = taxPriceApplied;
+    }
+
+    @Override
+    public String toString() {
+        return "ProductLineItem{" +
+                "product=" + product +
+                ", quantity=" + quantity +
+                ", totalPrice=" + totalPrice +
+                ", taxPriceApplied=" + taxPriceApplied +
+                '}';
     }
 }

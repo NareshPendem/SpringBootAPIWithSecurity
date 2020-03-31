@@ -15,11 +15,22 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * Helper class to validate Incoming Request.
+ */
 public class CheckoutValidator {
 
     static Logger logger = LoggerFactory.getLogger(CheckoutValidator.class);
-    public static boolean isInputValid(CartDataRequest cartDataRequest) throws InvalidInputDataException {
 
+    /**
+     * Method is used to assert incoming request for valid data.
+     * In case of invalid request, populates response with List of error messages.
+     * @param cartDataRequest
+     * @return boolean true - if the request is valid.
+     * @throws InvalidInputDataException
+     */
+    public static boolean isInputValid(CartDataRequest cartDataRequest) throws InvalidInputDataException {
+        logger.debug("ENTRY");
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         Validator validator = factory.getValidator();
         Set<ConstraintViolation<CartDataRequest>> violations = validator.validate(cartDataRequest);
