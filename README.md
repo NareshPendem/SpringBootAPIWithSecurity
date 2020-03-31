@@ -4,6 +4,9 @@
   The response is in JSON format and has itemized response with per item pricing, cart level pricing and order identifier.
   The web service accept and respond in JSON Payload.
 
+* **Setup and Run**
+    Checkout code and run below maven command : `mvn spring-boot:run`    
+
 * **URL**
 
   /checkout

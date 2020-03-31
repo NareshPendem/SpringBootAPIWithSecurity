@@ -26,9 +26,9 @@ public class CheckoutController {
             produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
     public CartDataResponse createCardData(@RequestBody CartDataRequest cartDataRequest, HttpServletRequest request){
-        logger.info("Incoming Request",cartDataRequest);
+        logger.info("Incoming Request : "+ cartDataRequest.toString());
         CartDataResponse cartDataResponse = checkoutService.processCartData(cartDataRequest);
-        logger.info("Outgoing Response",cartDataResponse);
+        logger.info("Outgoing Response : "+ cartDataResponse);
         return cartDataResponse;
     }
 }
