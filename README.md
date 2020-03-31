@@ -18,12 +18,33 @@
 
 * **Data Params**
 
-  None
+    **Sample Request Payload:** {
+   "currencyRate" : 1,
+   "taxRate":5,
+   "items":[
+      {
+        "product" : {
+		 "id":5,
+		 "name" : "Disinfectant Wipes",
+		 "price":10
+		 },
+         "quantity":2
+      },
+            {
+        "product" : {
+		 "id":248,
+		 "name" : "Hand Sanitizer",
+		 "price":20
+		 },
+         "quantity":2
+      }
+   ]
+}
 
 * **Success Response:**
 
   * **Code:** 201 <br />
-    **Content:** `{
+    **Content:** {
     "id": "4e9f525f-6c1f-485a-ad22-196f5286d825",
     "totalCartPrice": 63.00,
     "totalTaxApplied": 3.00,
