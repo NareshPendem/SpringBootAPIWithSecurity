@@ -5,7 +5,8 @@
   The web service accept and respond in JSON Payload.
 
 * **Setup and Run**
-    Checkout code and run below maven command : `mvn spring-boot:run`    
+    Checkout code and run below maven command : `mvn spring-boot:run` 
+    Sample Url : `https://localhost:8443/checkout`   
 
 * **URL**
 
@@ -14,6 +15,11 @@
 * **Method:**
 
   `POST`
+* **Headers:**
+    **Authorization holds Base64 encode of `userName:password`, preconfigured for "pendem:pendem"**
+    
+    `Content-Type : application/json,
+    Authorization : Basic cGVuZGVtOnBlbmRlbQ==` 
   
 *  **URL Params**
 
@@ -107,6 +113,12 @@
   }`
 
 ### Reference Documentation
+
+Certificate is generated with below command :
+
+`keytool -genkey -alias naresh -storetype PKCS12 -keyalg RSA -keysize 2048 -keystore naresh.p12 -validity 3650`
+
+
 For further reference, please consider the following sections:
 
 * [Official Apache Maven documentation](https://maven.apache.org/guides/index.html)

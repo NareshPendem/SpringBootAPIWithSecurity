@@ -32,7 +32,7 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(value = {InvalidInputDataException.class})
     public CartDataResponse invalidInputData(HttpServletRequest request , InvalidInputDataException e){
-        logger.error("Invalid Input Data {}",e);
+        //logger.error("Invalid Input Data {}",e);
         return e.getErrorResponse();
     }
 

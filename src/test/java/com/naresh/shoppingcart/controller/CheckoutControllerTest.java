@@ -1,15 +1,27 @@
 package com.naresh.shoppingcart.controller;
 
+import com.naresh.shoppingcart.dao.UserRepository;
 import com.naresh.shoppingcart.service.CheckoutService;
 import com.naresh.shoppingcart.service.CheckoutServiceImpl;
+import com.naresh.shoppingcart.service.MyUserDetailsService;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.TestConfiguration;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -18,22 +30,36 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+
+@AutoConfigureTestDatabase(replace= AutoConfigureTestDatabase.Replace.NONE)
 @RunWith(SpringRunner.class)
 @WebMvcTest(controllers = CheckoutController.class)
+@Import({CheckoutServiceImpl.class,MyUserDetailsService.class})
+@AutoConfigureMockMvc
 public class CheckoutControllerTest {
 
-    @TestConfiguration
-    static class Config {
-        @Bean
-        public CheckoutService getCheckoutService() {
-            return new CheckoutServiceImpl();
-        }
-    }
+//    @TestConfiguration
+//    static class Config {
+//        @Bean
+//        public CheckoutService getCheckoutService() {
+//            return new CheckoutServiceImpl();
+//        }
+//
+//        @Bean
+//        public UserDetailsService getUserDetailsService() {
+//            return new MyUserDetailsService();
+//        }
+//    }
 
     @Autowired
     private MockMvc mvc;
-    @Autowired
-    private CheckoutService checkoutService;
+    @MockBean
+    private CheckoutServiceImpl checkoutService;
+    @MockBean
+    private MyUserDetailsService userDetailsService;
+
+    @MockBean
+    private UserRepository repository;
 
     private String validRequest = "{\n" +
             "   \"currencyRate\" : 1,\n" +
@@ -60,6 +86,7 @@ public class CheckoutControllerTest {
 
 
     @Test
+    @WithMockUser(value = "pendem",password = "{bcrypt}$2a$10$GjWjoze29ErXfEEQS2Wz.ONvqZPXf0C807jaDx0LrOE0YXg4GAjPi")
     public void testValidInputRequestToReturn201StatusWithErrorAsNull() throws Exception {
         // Ensure 201 is returned without errors for valid Input Request.
         mvc.perform(post("/checkout").contentType(MediaType.APPLICATION_JSON).content(validRequest))
